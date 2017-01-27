@@ -1,0 +1,18 @@
+
+<div class="btn-group">
+  <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Make Changes<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li>
+      <%= link_to 'Edit', "/contacts/#{@contact.id}/edit"%>
+    </li>
+    <li>
+      <%= link_to 'Delete', "/contacts#{@contact.id}", method: :delete %>
+    </li>
+  </ul>
+</div>
+<h3>First name:<%= @contact.full_name%></h3>
+<h3>Email:<%= @contact.email%><h3>
+<h3>Phone number:<%= @contact.prefix%></h3>
+<h3>Created at:<%=@contact.friendly_created_at%></h3>
