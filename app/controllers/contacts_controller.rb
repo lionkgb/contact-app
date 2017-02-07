@@ -1,6 +1,10 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
+    if params[:group]
+      @contacts = Group.find_by(name: params[:group]).contacts
+    else
+      @contacts = Contact.all
+    end 
   end
   def show 
     @contact = Contact.find_by(id: params[:id])
@@ -40,4 +44,12 @@ class ContactsController < ApplicationController
     flash[:danger] = "contact destroyed"
     redirect_to "/contacts" 
   end 
+  def search 
+    search_query = params[:search_input]
+    @contacts = Contact.where("full_name LIKE ?""%#{search_query}%")
+    if @contacts.empty?
+      flash[:info] = "No contact found in search"
+    end
+    render :index
+  end
 end
